@@ -34,4 +34,10 @@ git checkout -b summer-2024/lastname
 
 6. Do not forget to publish your branch to this repository and push your changes (DO NOT merge to main).
 
+```bash
+git add .
+git commit -m "Commit message"
+git push origin summer-2024/lastname
+```
+
 ### That's all, have fun! 楽しんでね～
