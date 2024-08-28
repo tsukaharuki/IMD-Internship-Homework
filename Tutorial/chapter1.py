@@ -17,7 +17,7 @@ while True:
     if not success:
         break
     cv2.imshow("Result", img)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('Enter'):
         break
 # ============================================================
 
@@ -30,6 +30,6 @@ while True:
     success, img = cap.read()
 
     cv2.imshow("video", img)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('Enter'):
         break
 # ============================================================

@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 
+def empty(a):
+    pass
+
 def stack_images(scale, img_array):
     rows = len(img_array)
     cols = len(img_array[0])
@@ -36,14 +39,37 @@ def stack_images(scale, img_array):
         ver = hor
         
     return ver
-            
 
 
-img = cv2.imread('Resources/lena.png')
-img_gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+path = r"Resources\lambo.PNG"
+cv2.namedWindow("Track Bars")
+cv2.resizeWindow("Track Bars", 640, 240)
+cv2.createTrackbar("Hue Min","Track Bars",0,179,empty)
+cv2.createTrackbar("Hue Max","Track Bars",19,179,empty)
+cv2.createTrackbar("Sat Min","Track Bars",110,255,empty)
+cv2.createTrackbar("Sat Max","Track Bars",240,255,empty)
+cv2.createTrackbar("Val Min","Track Bars",153,255,empty)
+cv2.createTrackbar("Val Max","Track Bars",255,255,empty)
 
-img_stack = stack_images(0.5, ([img,img_gray,img_gray], [img,img,img]))
 
-cv2.imshow("Image Stack", img_stack)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+
+while True:
+    img = cv2.imread(path)
+    img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    h_min = cv2.getTrackbarPos("Hue Min","Track Bars")
+    h_max = cv2.getTrackbarPos("Hue Max", "Track Bars")
+    s_min = cv2.getTrackbarPos("Sat Min", "Track Bars")
+    s_max = cv2.getTrackbarPos("Sat Max", "Track Bars")
+    v_min = cv2.getTrackbarPos("Val Min", "Track Bars")
+    v_max = cv2.getTrackbarPos("Val Max", "Track Bars")
+    print(h_min, h_max, s_min, s_max, v_min, v_max)
+
+    lower = np.array([h_min, s_min, v_min])
+    upper = np.array([h_max, s_max, v_max])
+    mask = cv2.inRange(img_hsv, lower, upper)
+    img_result = cv2.bitwise_and(img, img, mask=mask)
+    img_stack = stack_images(0.6, ([img, img_hsv], [mask, img_result]))
+    
+    cv2.imshow("stacked images", img_stack)
+    cv2.waitKey(1)
