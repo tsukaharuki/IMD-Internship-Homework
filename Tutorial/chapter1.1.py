@@ -1,5 +1,5 @@
 import cv2
 
-img=cv2.imread("../Resources/VW2.png")
+img=cv2.imread("Resources/VW2.png")
 cv2.imshow("output",img)
 cv2.waitKey(0)

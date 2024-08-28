@@ -33,7 +33,7 @@ def stackImages(scale,imgArray):
         ver = hor
     return ver
 
-img = cv2.imread('../Resources/lena.png')
+img = cv2.imread('Resources/lena.png')
 imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 imgStack = stackImages(0.5,([img,imgGray,img],[img,img,img]))       #画像を行列に配置する(グレースケールと混ぜることができる)

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img=cv2.imread("../Resources/VW2.png")
+img=cv2.imread("Resources/VW2.png")
 kernel=np.ones((5,5),np.uint8)
 
 imgGray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)        #cvtColorは色空間の変換を行うもの。(「変換する画像」,「変換後の色」)

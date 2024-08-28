@@ -1,6 +1,6 @@
 import cv2
 
-cap=cv2.VideoCapture("../Resources/test_videos.mp4")
+cap=cv2.VideoCapture("Resources/test_videos.mp4")
 
 while True:     #動画の画像一枚一枚に処理をする
     success,img=cap.read()
