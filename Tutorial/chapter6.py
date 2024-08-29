@@ -33,8 +33,9 @@ def stackImages(scale,imgArray):
     return ver
 
 img = cv2.imread("Tutorial/Resources/lena.png")
+imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-imgStack = stackImages(0.5,([img,img,img]))
+imgStack = stackImages(0.5,([img,imgGray,img],[img,img,img]))
 
 #imgHor = np.hstack((img,img))
 #imgVer = np.vstack((img,img))
