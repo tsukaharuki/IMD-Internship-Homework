@@ -12,7 +12,7 @@ from libs.get_video_img import get_video_img, split_pic
 img_save_path = r"Resources\imgs\capture_img.jpg"
 faces = get_video_img(img_save_path)
 
-split_setting = 2
+split_setting = 3
 
 #画像の分割数指定、パズル用の情報入力
 splitx=split_setting
@@ -95,7 +95,7 @@ def play_pazzle(event, x, y, flags, params):
 for j in range(splitx):
     for i in range(splity):
         num=j*splitx+i
-        cv2.putText(img, str(num) ,(int(org_cx + width/splitx*j + width/6), int(org_cy+height/splity*i + height/6)),cv2.FONT_HERSHEY_SIMPLEX,fontScale=1.0,color=(255,0,0),thickness=2)
+        cv2.putText(img, str(num) ,(int(org_cx + width/splitx*j + width/6), int(org_cy+height/splity*i + height/6)),cv2.FONT_HERSHEY_SIMPLEX,fontScale=1.0,color=(255,0,0),thickness=1)
 
 cv2.imshow('window', img)
 cv2.setMouseCallback('window', play_pazzle)
