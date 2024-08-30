@@ -20,7 +20,7 @@ def split_pic(img, org_cx, org_cy, splitx, splity, height, width):
 def get_video_img(img_save_path):
     import cv2
 
-    face_cascade = cv2.CascadeClassifier(r"Resources/haarcascade_frontalface_default.xml")
+    face_cascade = cv2.CascadeClassifier(r"haarcascade_frontalface_default.xml")
 
     #画像読み込み
     cap = cv2.VideoCapture(0)

@@ -2,13 +2,18 @@ import numpy as np
 import cv2
 
 #クリック後の画像アップデート関数
-def pic_update(pic_list,pos_list, height, width, splitx, splity, faces, img):
+def pic_update(pic_list,pos_list, height, width, splitx, splity, faces, img, elapsed_time):
+    minutes = int(elapsed_time // 60)
+    seconds = int(elapsed_time % 60)
+    time_text = f"elapsed_time = {minutes:02}:{seconds:02}"
+
     org_cx, org_cy, width, height = faces[0]
     img_height, img_width, _ = img.shape
     info_space = 50 # ゲーム情報を描きだすための余白
     base_img = np.zeros((img_height+info_space, img_width, 3), np.uint8)
     base_img[info_space:info_space+img_height, 0:img_width] = img
     base_img[org_cy+info_space:org_cy+info_space+height, org_cx:org_cx+width] = 0
+    cv2.putText(base_img, time_text, (img_width//3-10, 30),cv2.FONT_HERSHEY_SIMPLEX,fontScale=0.6,color=(255,255,0),thickness=2)
 
     cx, cy = org_cx, org_cy
     for j in range(splitx):
