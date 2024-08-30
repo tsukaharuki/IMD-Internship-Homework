@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
         original_image = pygame.image.load("Project/dog.png").convert()
-        self.surf = pygame.transform.scale(original_image, (40, 40))
+        self.surf = pygame.transform.scale(original_image, (60, 60))
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
     
@@ -58,7 +58,7 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
         original_image = pygame.image.load("Project/zombiedog.png").convert()
-        self.surf = pygame.transform.scale(original_image, (30, 30))
+        self.surf = pygame.transform.scale(original_image, (50, 50))
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect(
             center=(
@@ -166,10 +166,16 @@ while running:
             player.kill()
             collision_sound.play()
             game_over = True
+            # フレームを保存
+            if frame is not None:
+                cv2.imwrite("Project/game_over_screenshot.png", frame)
 
         # ゲームクリア判定
         if elapsed_time >= 30:
             game_clear = True
+            # フレームを保存
+            if frame is not None:
+                cv2.imwrite("Project/game_clear_screenshot.png", frame)
 
         # ディスプレイの更新
         pygame.display.flip()
