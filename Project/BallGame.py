@@ -17,7 +17,7 @@ space = pymunk.Space()
 space.gravity = (0, 980)
 
 #pygame用
-WIDTH,HEIGHT = 680, 520
+WIDTH,HEIGHT = 680, 480
 window = pygame.display.set_mode((WIDTH,HEIGHT))        #pygame用のウィンドウを作成
 clock = pygame.time.Clock()
 
@@ -60,8 +60,6 @@ cap.set(4,HEIGHT)  #縦幅を設定。ID4は横幅設定の項目
 def change_brightness():        #カメラの明るさを変更する関数
     camera_brightness = cv2.getTrackbarPos("camera brightness", "TrackBars_red")
     cap.set(10, camera_brightness)  # 明るさを設定。 ID10
-
-
 
 def detect_red():       #赤い長方形を検出
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)  # フレームをHSV色空間に変換
@@ -180,12 +178,39 @@ def create_ball(space, radius, mass):       #円を生成する関数
     shape.friction = 0.9        #摩擦を追加
     return shape
 
-#def create_stage():
+#ステージを作る関数
+def create_stage():
+    wall= [
+        [(200, 300),(10,350)],       #壁を作るための情報。[pos(長方形の中心位置),size(長方形の縦横長さ)]
+        [(200, 20), (10, 30)],
+    ]
+    for pos, size in wall:    #ループでrects内の各壁の情報をpos,sizeに代入する
+        body = pymunk.Body(body_type=pymunk.Body.STATIC)        #ボディを作成
+        body.position = pos     #ボディの位置をposに設定
+        shape = pymunk.Poly.create_box(body, size)      #大きさがsizeのshapeを作成
+        shape.elasticity = 0.7      #弾性を追加
+        shape.friction = 0.5        #摩擦を追加
+        space.add(body,shape)       #body(物理情報)とshape(当たり判定)を持ったモデルを追加
 
+    goals = [
+        [(650, 80), (10, 90)],       #ゴールを作るための情報。[pos(長方形の中心位置),size(長方形の縦横長さ)]
+        [(600, 100), (10, 40)],
+        [(620, 120), (50, 10)],
+        [(620, 40), (50, 10)],
+    ]
+    for pos, size in goals:    #ループでrects内の各壁の情報をpos,sizeに代入する
+        body = pymunk.Body(body_type=pymunk.Body.STATIC)        #ボディを作成
+        body.position = pos     #ボディの位置をposに設定
+        shape = pymunk.Poly.create_box(body, size)      #大きさがsizeのshapeを作成
+        shape.elasticity = 0.2      #弾性を追加
+        shape.friction = 0.5        #摩擦を追加
+        shape.color = (0, 255, 255, 100)
+        space.add(body,shape)       #body(物理情報)とshape(当たり判定)を持ったモデルを追加
 
 
 # Pygame用の描画ヘルパー
 draw_options = pymunk.pygame_util.DrawOptions(window)
+create_stage()
 
 #メイン
 while run:      #runがtrueなら実行する
@@ -193,9 +218,8 @@ while run:      #runがtrueなら実行する
     if not ret:
         break
 
-    window.fill((255, 255, 255))    # 画面を白くする
-    pygame.draw.circle(window, (255, 0, 0), (spawn_X, spawn_Y), ball_R)     #スポーン位置に円を描写
-
+    window.fill((255, 255, 255))  # 画面を白くする
+    pygame.draw.circle(window, (255, 0, 0), (spawn_X, spawn_Y), ball_R)  # スポーン位置に円を描写
 
     # 常にイベントを受け付けるところ
     for event in pygame.event.get():
@@ -223,7 +247,7 @@ while run:      #runがtrueなら実行する
     cv2.imshow('Detected Rectangles', frame)
 
     # 物理エンジンのステップ
-    space.step(1/80.0)
+    space.step(1/60.0)
 
 
     # 物理オブジェクトの描画
@@ -231,6 +255,6 @@ while run:      #runがtrueなら実行する
 
     # 画面更新
     pygame.display.flip()
-    clock.tick(80)
+    clock.tick(60)
 
 pygame.quit()
