@@ -61,7 +61,7 @@ while True:
     
     segmented_image = copy_img
     segmented_image = cv2.addWeighted(src1=segmented_image, alpha=alpha, src2=img, beta=beta, gamma=0)
-    
+    kiriyuki_copy = kiriyuki.copy()
     
     if bird and count < obj_max:
         segmented_image[int(windH/5):int(windH/5)+int(windW/19),int(windW)-int(windW/19)-count:int(windW)-count] = segmented_image[int(windH/5):int(windH/5)+int(windW/19),int(windW)-int(windW/19)-count:int(windW)-count] * (1 - img_bird[:, :, 3:] / 255) + \
@@ -93,9 +93,9 @@ while True:
         
         if kiri:
             for(x,y,w,h)in faces:
-                kiriyuki = cv2.resize(kiriyuki, (w, h), interpolation=cv2.INTER_LANCZOS4)
-                segmented_image[y:y+h,x:x+w] = segmented_image[y:y+h,x:x+w]  * (1 - kiriyuki[:, :, 3:] / 255) + \
-                        kiriyuki[:, :, :3] * (kiriyuki[:, :, 3:] / 255)
+                kiriyuki_copy = cv2.resize(kiriyuki_copy, (w, h), interpolation=cv2.INTER_LANCZOS4)
+                segmented_image[y:y+h,x:x+w] = segmented_image[y:y+h,x:x+w]  * (1 - kiriyuki_copy[:, :, 3:] / 255) + \
+                        kiriyuki_copy[:, :, :3] * (kiriyuki_copy[:, :, 3:] / 255)
         
         cv2.imshow("Video",segmented_image)
         if cv2.waitKey(1) & 0xFF == ord('q'):
