@@ -26,7 +26,7 @@ git checkout -b spring-2025/lastname
    - Please create a new py file in the Project folder (not the Tutorial folder). You can create as many py files or other related code inside this Project folder.
    - Think of an interesting computer vision project you really want to do (should be different from the 3 example projects shown in tutorial). Depending on your interest, it could be just as simple as image processing using the standard OpenCV library, or using more advance DNNs like [YOLO](https://github.com/autogyro/yolo-V8) for object detection and segmentation.
    - For those who really want challenge, you can try to make more advanced computer vision projects like using Mediapipe and TensorFlow. One interesting project is this Naruto handseal recognition project: [code](https://github.com/ben-tiki/naruto-handseal-recognition) / [demo](https://ben-tiki.github.io/naruto-handseal-recognition/)
-   - But do keep in mind that you only have three days to complete the tutorial + project.
+   - But do keep in mind that you only have very limited time to complete the tutorial + project.
 
 6. Do not forget to publish your branch to this repository and push your changes (DO NOT merge to main).
 
