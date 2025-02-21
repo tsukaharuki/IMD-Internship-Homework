@@ -1,9 +1,5 @@
 # IMD-Internship-Homework
 
-Homework for Interactive Media Design (IMD) Lab, Summer 2024 Internship students.
-
-Deadline: August 30, 2024 (FRI)
-
 ## Instructions
 
 1. Share to [me](https://github.com/sid410) your github username or email so that I can add you as collaborator to [this repository](https://github.com/sid410/IMD-Internship-Homework.git).
@@ -14,10 +10,10 @@ Deadline: August 30, 2024 (FRI)
 git clone https://github.com/sid410/IMD-Internship-Homework.git
 ```
 
-3. Based from main, create a new branch called `summer-2024/lastname` (*Change the lastname to your actual lastname in smallcaps).
+3. Based from main, create a new branch called `spring-2025/lastname` (*Change the lastname to your actual lastname in smallcaps).
 
 ```bash
-git checkout -b summer-2024/lastname
+git checkout -b spring-2025/lastname
 ```
 
 4. Follow this [tutorial](https://www.youtube.com/watch?v=WQeoO7MI0Bs) to learn OpenCV:
@@ -37,7 +33,7 @@ git checkout -b summer-2024/lastname
 ```bash
 git add .
 git commit -m "Commit message"
-git push origin summer-2024/lastname
+git push origin spring-2025/lastname
 ```
 
 ### That's all, have fun! 楽しんでね～
